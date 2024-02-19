@@ -46,10 +46,11 @@ public class WebHandlerBot extends AbilityBot {
         }
 
         String messageText = update.getMessage().getText();
-        Long userId = update.getMessage().getChatId(); // Чат ID также может использоваться как идентификатор пользователя
+        Long userId = update.getMessage().getChatId();
 
-        if (!messageText.startsWith("/start") && !registrationManager.isUserRegistered(userId)) {
-            silent.send( "Please start the bot by typing /start.",update.getMessage().getChatId());
+        if (messageText.startsWith("/") && !messageText.startsWith("/start") && !messageText.startsWith("/help") &&
+            !messageText.startsWith("/track") && !messageText.startsWith("/untrack") && !messageText.startsWith("/list")) {
+            silent.send("This command is not recognized. Use /help to see the list of available commands.", userId);
             return;
         }
 
