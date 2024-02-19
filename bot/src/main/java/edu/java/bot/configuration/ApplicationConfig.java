@@ -1,13 +1,27 @@
 package edu.java.bot.configuration;
 
 import jakarta.validation.constraints.NotEmpty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 
-@Validated
-@ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
-public record ApplicationConfig(
-    @NotEmpty
-    String telegramToken
-) {
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ApplicationConfig {
+
+    @Value("${app.telegram-token}")
+    @Getter
+    private String telegramToken;
+
+    @Value("${app.telegram-bot-name}")
+    @Getter
+    private String botName;
+
+    @Value("${app.telegram-creator-id}")
+    @Getter
+    private Integer creatorId;
+
+    @Value("${server.port}")
+    @Getter
+    private int serverPort;
 }
