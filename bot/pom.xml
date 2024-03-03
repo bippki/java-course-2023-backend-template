@@ -54,7 +54,6 @@
             <artifactId>telegrambots-abilities</artifactId>
             <version>6.9.7.0</version>
         </dependency>
-
         <!-- Dev Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -97,7 +96,7 @@
         </dependency>
         <dependency>
             <groupId>org.wiremock</groupId>
-            <artifactId>wiremock</artifactId>
+            <artifactId>wiremock-standalone</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -130,33 +129,17 @@
             <artifactId>kafka</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots</artifactId>
-            <version>6.9.7.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots-abilities -->
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots-abilities</artifactId>
-            <version>6.9.7.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots-spring-boot-starter</artifactId>
-            <version>6.7.0</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.3.0</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
+            <groupId>edu.java</groupId>
+            <artifactId>scrapper</artifactId>
+            <version>0.1</version>
+            <scope>compile</scope>
         </dependency>
 
 
