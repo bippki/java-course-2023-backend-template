@@ -1,7 +1,7 @@
 package edu.java.bot.handler;
 
 
-import entity.dto.ApiErrorResponse;
+import edu.java.bot.entity.ApiErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Component;

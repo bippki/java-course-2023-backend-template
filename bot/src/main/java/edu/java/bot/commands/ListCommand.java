@@ -7,7 +7,7 @@ import edu.java.bot.exception.ApiErrorResponseException;
 import edu.java.bot.service.Scrapper;
 import edu.java.bot.utils.LanguageManager;
 import lombok.RequiredArgsConstructor;
-import entity.dto.LinkResponse;
+import edu.java.bot.entity.LinkResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

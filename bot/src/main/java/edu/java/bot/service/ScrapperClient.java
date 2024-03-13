@@ -2,17 +2,15 @@ package edu.java.bot.service;
 
 
 import edu.java.bot.exception.ApiErrorResponseException;
-import entity.dto.AddLinkRequest;
-import entity.dto.ApiErrorResponse;
-import entity.dto.LinkResponse;
-import entity.dto.ListLinksResponse;
-import entity.dto.RemoveLinkRequest;
+import edu.java.bot.entity.AddLinkRequest;
+import edu.java.bot.entity.ApiErrorResponse;
+import edu.java.bot.entity.LinkResponse;
+import edu.java.bot.entity.ListLinksResponse;
+import edu.java.bot.entity.RemoveLinkRequest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
-import java.net.URI;
-import java.util.List;
 
 public class ScrapperClient extends AbstractClient implements Scrapper {
     private static final String TG_CHAT_ID_HEADER = "Tg-Chat-Id";
