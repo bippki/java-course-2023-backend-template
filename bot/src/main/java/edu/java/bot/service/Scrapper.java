@@ -1,9 +1,9 @@
 package edu.java.bot.service;
 
-import entity.dto.AddLinkRequest;
-import entity.dto.LinkResponse;
-import entity.dto.ListLinksResponse;
-import entity.dto.RemoveLinkRequest;
+import edu.java.bot.entity.AddLinkRequest;
+import edu.java.bot.entity.LinkResponse;
+import edu.java.bot.entity.ListLinksResponse;
+import edu.java.bot.entity.RemoveLinkRequest;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 

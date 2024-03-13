@@ -2,7 +2,7 @@ package edu.java.bot.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import entity.dto.ApiErrorResponse;
+import edu.java.bot.entity.ApiErrorResponse;
 
 @RequiredArgsConstructor
 @Getter

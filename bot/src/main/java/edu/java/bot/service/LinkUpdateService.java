@@ -4,7 +4,7 @@ import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.WebHandlerBot;
 import lombok.RequiredArgsConstructor;
-import entity.dto.LinkUpdateRequest;
+import edu.java.bot.entity.LinkUpdateRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
