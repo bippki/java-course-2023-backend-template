@@ -5,6 +5,8 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import edu.java.client.GithubWebClient;
 import edu.java.entity.dto.GithubResponse;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +15,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class GitHubClientTest {
-    private static final String repositoryName = "java-course-2023-backend-template";
-    private static final String authorName = "bippki";
+    private static final String repositoryName = "ModularMachinery";
+    private static final String authorName = "bob302";
 
     @RegisterExtension
     public static final WireMockExtension WIRE_MOCK_SERVER = WireMockExtension.newInstance()
@@ -31,7 +31,7 @@ public class GitHubClientTest {
 
     @DynamicPropertySource
     private static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.api-link.git-hub", WIRE_MOCK_SERVER::baseUrl);
+        registry.add("scrapper.api-link.github", WIRE_MOCK_SERVER::baseUrl);
     }
 
     @Autowired
@@ -41,11 +41,11 @@ public class GitHubClientTest {
     public void testGetUserRepositoryForExistingRepository() {
         // Given
         final String repositoryPath = authorName +  "/" + repositoryName;
-        final OffsetDateTime repositoryCreatedAt = OffsetDateTime.of(2024, 2, 18, 16, 47, 14, 0, ZoneOffset.UTC);
+        final OffsetDateTime repositoryCreatedAt = OffsetDateTime.of(2023, 6, 27, 21, 10, 31, 0, ZoneOffset.UTC);
         WIRE_MOCK_SERVER.stubFor(WireMock.get("/repos/" + repositoryPath)
             .willReturn(WireMock.ok()
                 .withHeader("Content-type", MediaType.APPLICATION_JSON_VALUE)
-                .withBody(String.format("{\"full_name\": \"%s\", \"updated_at\": \"2024-02-18T16:47:14Z\"}", repositoryPath))));
+                .withBody(String.format("{\"full_name\": \"%s\", \"updated_at\": \"2023-06-27T21:10:31Z\"}", repositoryPath))));
 
         // When
         GithubResponse response = client.getUserRepository(repositoryPath).block();
@@ -59,12 +59,13 @@ public class GitHubClientTest {
     @Test
     public void testGetUserRepositoryForNonExistingRepository() {
         // Given
-        final String repositoryPath = "bippki/Spooky";
+        final String repositoryPath = "praymag/DicordRPC";
         WIRE_MOCK_SERVER.stubFor(WireMock.get("/repos/" + repositoryPath)
             .willReturn(WireMock.notFound()
                 .withHeader("Content-type", MediaType.APPLICATION_JSON_VALUE)
                 .withBody("{\"message\": \"Not Found\", \"documentation_url\": \"https://docs.github.com/rest/repos/repos#get-a-repository\"}")));
 
+        // When, Then
         assertThrows(WebClientResponseException.class, () -> client.getUserRepository(repositoryPath).block());
     }
 }

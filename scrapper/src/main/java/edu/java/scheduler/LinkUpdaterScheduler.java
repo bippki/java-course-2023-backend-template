@@ -1,21 +1,46 @@
 package edu.java.scheduler;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import edu.java.client.BotClient;
+import edu.java.configuration.ApplicationConfig;
+import edu.java.entity.dto.bot.LinkUpdateRequest;
+import edu.java.service.LinkService;
+import edu.java.util.client.BaseClientProcessor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @Component
-@ConditionalOnProperty(value = "app.scheduler.enable", havingValue = "true")
+@RequiredArgsConstructor
 public class LinkUpdaterScheduler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LinkUpdaterScheduler.class);
+    private final List<BaseClientProcessor> clientProcessors;
+    private final LinkService linkService;
+    private final BotClient botClient;
+    private final ApplicationConfig config;
 
-    @Scheduled(fixedDelayString = "${app.scheduler.interval}")
+    @Scheduled(fixedDelayString = "${scrapper.scheduler.interval}")
     public void update() {
-        LOGGER.info("Running scheduled update...");
+        linkService.listAllWithInterval(config.scheduler().linkLastCheckInterval()).forEach(link -> {
+            for (BaseClientProcessor clientProcessor : clientProcessors) {
+                if (clientProcessor.isCandidate(link.getUrl())) {
+                    clientProcessor.getUpdate(link)
+                        .filter(Objects::nonNull)
+                        .map(update -> new LinkUpdateRequest(
+                            link.getId(),
+                            link.getUrl(),
+                            update,
+                            linkService.getAllChatsForLink(link.getId())
+                        ))
+                        .subscribe(botClient::sendUpdate);
+                    link.setLastUpdatedAt(OffsetDateTime.now());
+                    linkService.updateLink(link);
+                    break;
+                }
+            }
+        });
     }
 }

@@ -2,6 +2,7 @@ package edu.java.handler;
 
 import edu.java.entity.dto.bot.ApiErrorResponse;
 import edu.java.exception.LinkAlreadyTrackingException;
+import edu.java.exception.LinkNotSupportedException;
 import edu.java.exception.LinkNotTrackingException;
 import edu.java.exception.TelegramChatAlreadyRegistered;
 import edu.java.exception.TelegramChatNotExistsException;
@@ -35,5 +36,11 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiErrorResponse> linkNotTrackingException(LinkNotTrackingException exception) {
         return ResponseEntity.badRequest()
             .body(ExceptionUtil.fromResponseStatus(exception, "Link Not Tracking"));
+    }
+
+    @ExceptionHandler(LinkNotSupportedException.class)
+    public ResponseEntity<ApiErrorResponse> linkNotSupportedException(LinkNotSupportedException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+            .body(ExceptionUtil.fromResponseStatus(exception, "Link Not Supported"));
     }
 }

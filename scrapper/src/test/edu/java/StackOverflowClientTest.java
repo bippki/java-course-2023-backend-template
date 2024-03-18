@@ -3,12 +3,12 @@ package edu.java;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
+import edu.java.client.StackOverflowWebClient;
+import edu.java.entity.dto.StackOverflowResponse;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Objects;
-import edu.java.client.StackOverflowWebClient;
-import edu.java.entity.dto.StackOverflowResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class StackOverflowClientTest {
 
     @DynamicPropertySource
     private static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.api-link.stack-overflow", WIRE_MOCK_SERVER::baseUrl);
+        registry.add("scrapper.api-link.stack-overflow", WIRE_MOCK_SERVER::baseUrl);
     }
 
     @Autowired
@@ -36,23 +36,33 @@ public class StackOverflowClientTest {
 
     @Test
     public void testQuestionRetrievalForExistingQuestion() {
+        // Given
         final String questionIds = "47176744";
         final int epochSecond = 1511021257;
         final OffsetDateTime lastActivityDate =
             OffsetDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneId.of("Z"));
         final String expectedTitle = "What is your funny meme about programming?";
+
+        // When
         mockQuestionResponse(questionIds, epochSecond, expectedTitle);
         StackOverflowResponse response = client.getQuestionsInfo(questionIds).block();
-        Objects.requireNonNull(response);
 
+        // Then
+        Objects.requireNonNull(response);
+        assertEquals(expectedTitle, response.items().get(0).title());
+        assertEquals(lastActivityDate, response.items().get(0).lastActivityDate());
     }
 
     @Test
     public void testQuestionRetrievalForNonExistingQuestion() {
+        // Given
         final String questionIds = "1";
+
+        // When
         mockEmptyQuestionResponse(questionIds);
         StackOverflowResponse response = client.getQuestionsInfo(questionIds).block();
 
+        // Then
         Objects.requireNonNull(response);
         assertTrue(response.items().isEmpty());
     }
