@@ -60,7 +60,7 @@ public class GitHubClientTest {
     @Test
     public void testGetUserRepositoryForNonExistingRepository() {
         // Given
-        final String repositoryPath = "praymag/DicordRPC";
+        final String repositoryPath = "bippki/Spooky";
         WIRE_MOCK_SERVER.stubFor(WireMock.get("/repos/" + repositoryPath)
             .willReturn(WireMock.notFound()
                 .withHeader("Content-type", MediaType.APPLICATION_JSON_VALUE)
