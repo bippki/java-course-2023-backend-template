@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class GitHubClientTest {
-    private static final String repositoryName = "ModularMachinery";
-    private static final String authorName = "bob302";
+    private static final String repositoryName = "java-course-2023-backend-template";
+    private static final String authorName = "bippki";
 
     @RegisterExtension
     public static final WireMockExtension WIRE_MOCK_SERVER = WireMockExtension.newInstance()
@@ -36,6 +36,7 @@ public class GitHubClientTest {
 
     @Autowired
     private GithubWebClient client;
+
 
     @Test
     public void testGetUserRepositoryForExistingRepository() {

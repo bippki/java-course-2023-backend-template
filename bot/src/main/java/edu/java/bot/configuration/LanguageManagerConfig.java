@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class LanguageManagerConfig {
     private final ApplicationConfig applicationConfig;
+    //TODO Я еще не разобрался как подтягивать с другого модуля конфиги этаго
     @Bean
     public LanguageManager languageManager() {
         return new LanguageManager("lang.json");
