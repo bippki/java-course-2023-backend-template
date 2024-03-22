@@ -22,16 +22,16 @@ public class LinkController {
 
     @GetMapping
     public ListLinksResponse getAllLinks(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        return linkService.getAllLinksForChat(tgChatId);
+        return linkService.listAllForChat(tgChatId);
     }
 
     @PostMapping
     public LinkResponse addLink(@RequestHeader("Tg-Chat-Id") Long tgChatId, @RequestBody AddLinkRequest request) {
-        return linkService.addLinkForChat(tgChatId, request);
+        return linkService.add(tgChatId, request.link());
     }
 
     @DeleteMapping
     public LinkResponse removeLink(@RequestHeader("Tg-Chat-Id") Long tgChatId, @RequestBody RemoveLinkRequest request) {
-        return linkService.removeLinkForChat(tgChatId, request);
+        return linkService.remove(tgChatId, request.link());
     }
 }

@@ -11,6 +11,7 @@ public record GithubResponse(
     @JsonProperty("name")String name,
     @JsonProperty("created_at") OffsetDateTime createdAt,
 
+    @JsonProperty("updated_at") OffsetDateTime updatedAt,
     @JsonProperty("owner")Owner owner
 ) {
     public record Owner(

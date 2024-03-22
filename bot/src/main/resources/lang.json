@@ -1,0 +1,92 @@
+{
+    "en": {
+        "command": {
+            "error": {
+                "default": "Something went wrong!"
+            },
+            "list": {
+                "description": "Show list of tracked links",
+                "error.no_links": "You are not tracking any links",
+                "response.tracked_links": "Tracked links"
+            },
+            "start": {
+                "description": "Register a user",
+                "response.hi": "Hi",
+                "response.successfully_registered": "You have been successfully registered!",
+                "response.view_commands": "You can see the available commands using the /help command",
+                "error.conflict": "You are already registered!"
+            },
+            "track": {
+                "description": "Start tracking link",
+                "error.invalid_syntax": "Invalid syntax!",
+                "error.invalid_link": "Invalid link!",
+                "response.link_added_success": "[Link](%s) added successfully!",
+                "error.link_already_exists": "[Link](%s) already being tracked!"
+            },
+            "untrack": {
+                "description": "Stop tracking a link",
+                "response.link_removed_success": "[Link](%s) successfully removed from tracked!",
+                "error.invalid_syntax": "Invalid syntax!",
+                "error.invalid_link": "Invalid link!",
+                "error.invalid_index": "The link and/or index is incorrect!"
+            },
+            "help": {
+                "description": "Show list of commands",
+                "response.available_commands": "Available commands"
+            },
+            "bot": {
+                "error.unknown_command": "Unknown command. Available commands: /help",
+                "response.available_commands": "Type a command. Available commands: /help"
+            },
+            "language": {
+                "set": "Language set to English",
+                "response.description": "Choose Language"
+            }
+        }
+    },
+    "ru": {
+        "command": {
+            "error": {
+                "default": "Что-то пошло не так!"
+            },
+            "list": {
+                "description": "Показать список отслеживаемых ссылок",
+                "error.no_links": "Вы не отслеживаете ни одной ссылки",
+                "response.tracked_links": "Отслеживаемые ссылки"
+            },
+            "start": {
+                "description": "Зарегистрировать пользователя",
+                "response.hi": "Привет",
+                "response.successfully_registered": "Вы успешно зарегистрированы!",
+                "response.view_commands": "Вы можете увидеть доступные команды, используя команду /help",
+                "error.conflict": "Вы уже зарегестрированы!"
+            },
+            "track": {
+                "description": "Начать отслеживать ссылку",
+                "error.invalid_syntax": "Неверный синтаксис!",
+                "error.invalid_link": "Неверная ссылка!",
+                "response.link_added_success": "[Ссылка](%s) успешно добавлена!",
+                "error.link_already_exists": "[Ссылка](%s) уже отслеживается!"
+            },
+            "untrack": {
+                "description": "Прекратить отслеживание ссылки",
+                "response.link_removed_success": "[Ссылка](%s) успешно удалена из отслеживаемых!",
+                "error.invalid_syntax": "Неверный синтаксис!",
+                "error.invalid_link": "Неверная ссылка!",
+                "error.invalid_index": "Ссылка и/или индекс некорректны!"
+            },
+            "help": {
+                "description": "Показать список команд",
+                "response.available_commands": "Доступные команды"
+            },
+            "bot": {
+                "error.unknown_command": "Неизвестная команда. Доступные команды: /help",
+                "response.available_commands": "Введите команду. Доступные команды: /help"
+            },
+            "language": {
+                "set": "Язык установлен на русский",
+                "response.description": "Выбрать язык"
+            }
+        }
+    }
+}
