@@ -21,12 +21,15 @@
         <Logger name="org.apache" level="WARN"/>
         <Logger name="org.hibernate" level="WARN"/>
         <Logger name="org.postgresql" level="WARN"/>
-        <Logger name="org.springframework" level="WARN"/>
+        <Logger name="org.springframework" level="DEBUG"/>
+        <Logger name="org.springframework.context" level="DEBUG"/>
+        <Logger name="org.springframework.beans" level="DEBUG"/>
         <Logger name="org.springframework.cache" level="WARN"/>
         <Logger name="org.springframework.security" level="DEBUG"/>
         <Logger name="org.springframework.web" level="DEBUG"/>
         <Logger name="sun.rmi" level="WARN"/>
         <Logger name="sun.rmi.transport" level="WARN"/>
+        <Logger name="org.jooq" level="DEBUG"/>
 
 <!--        <Logger name="org.hibernate" level="info"/>-->
 <!--        <Logger name="org.hibernate.SQL" level="debug"/>-->
