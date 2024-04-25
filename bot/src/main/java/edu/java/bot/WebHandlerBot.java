@@ -61,7 +61,7 @@ public class WebHandlerBot extends TelegramBot {
         }
 
         if (!isCommandFind) {
-            execute(new SendMessage(chatId, languageManager.translate("bot.error.unknown_command")));
+            execute(new SendMessage(chatId, languageManager.translate("command.bot.error.unknown_command")));
         }
     }
 
@@ -72,6 +72,6 @@ public class WebHandlerBot extends TelegramBot {
 
     private void processNonCommandMessage(Long chatId, String message) {
         LOGGER.info("[Chat id: %s] process text: %s".formatted(chatId, message));
-        execute(new SendMessage(chatId, languageManager.translate("bot.response.available_commands")));
+        execute(new SendMessage(chatId, languageManager.translate("command.bot.response.available_commands")));
     }
 }
