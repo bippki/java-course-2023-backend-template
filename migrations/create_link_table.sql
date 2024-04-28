@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS link
+(
+    id              BIGINT GENERATED ALWAYS AS IDENTITY,
+    url             VARCHAR(256) UNIQUE NOT NULL,
+    last_updated_at TIMESTAMP WITH TIME ZONE,
+    PRIMARY KEY (id)
+);

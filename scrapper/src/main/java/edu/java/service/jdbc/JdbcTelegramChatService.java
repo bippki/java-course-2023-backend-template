@@ -1,18 +1,16 @@
 package edu.java.service.jdbc;
 
-import edu.java.domain.jdbc.JdbcTelegramChatRepository;
 import edu.java.entity.TelegramChat;
 import edu.java.entity.dto.ChatOperationResponse;
 import edu.java.exception.TelegramChatAlreadyRegistered;
 import edu.java.exception.TelegramChatNotExistsException;
+import edu.java.repository.jdbc.JdbcTelegramChatRepository;
 import edu.java.service.TelegramChatService;
 import java.time.OffsetDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
 
-@Component
 @RequiredArgsConstructor
 public class JdbcTelegramChatService implements TelegramChatService {
     private final JdbcTelegramChatRepository telegramChatRepository;

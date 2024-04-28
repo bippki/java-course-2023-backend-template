@@ -21,7 +21,8 @@
                 "error.invalid_syntax": "Invalid syntax!",
                 "error.invalid_link": "Invalid link!",
                 "response.link_added_success": "[Link](%s) added successfully!",
-                "error.link_already_exists": "[Link](%s) already being tracked!"
+                "error.link_already_exists": "[Link](%s) already being tracked!",
+                "error.invalid_link_pattern": "[Link](%s) does not match the pattern github.com/USER_NAME/REPOSITORY or stackoverflow.com/questions/ID/NAME!"
             },
             "untrack": {
                 "description": "Stop tracking a link",
@@ -66,7 +67,8 @@
                 "error.invalid_syntax": "Неверный синтаксис!",
                 "error.invalid_link": "Неверная ссылка!",
                 "response.link_added_success": "[Ссылка](%s) успешно добавлена!",
-                "error.link_already_exists": "[Ссылка](%s) уже отслеживается!"
+                "error.link_already_exists": "[Ссылка](%s) уже отслеживается!",
+                "error.invalid_link_pattern": "[Ссылка](%s) не соответствует шаблону github.com/USER_NAME/REPOSITORY или stackoverflow.com/questions/ID/NAME!"
             },
             "untrack": {
                 "description": "Прекратить отслеживание ссылки",

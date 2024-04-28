@@ -28,6 +28,7 @@ public abstract class IntegrationTest {
             .withDatabaseName("scrapper")
             .withUsername("postgres")
             .withPassword("postgres");
+        POSTGRES.setCommand("postgres", "-c", "max_connections=20000");
         POSTGRES.start();
         runMigrations(POSTGRES);
     }

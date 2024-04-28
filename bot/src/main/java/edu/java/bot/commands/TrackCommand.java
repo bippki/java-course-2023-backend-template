@@ -56,9 +56,14 @@ public class TrackCommand implements Command {
             return new SendMessage(chatId, languageManager.translate("command.track.error.link_already_exists"));
         }
 
-        return new SendMessage(chatId, getResponseMessage(chatId, link))
-            .disableWebPagePreview(true)
-            .parseMode(ParseMode.Markdown);
+        return getResponseMessage(chatId, link)
+            .map(responseMessage -> new SendMessage(chatId, responseMessage)
+                .disableWebPagePreview(true)
+                .parseMode(ParseMode.Markdown))
+            .onErrorResume(
+                throwable -> Mono.just(new SendMessage(chatId, languageManager.translate("command.track.error.invalid_link_pattern")))
+            )
+            .block();
     }
 
     private boolean linkAlreadyExists(Long chatId, URI link) {
@@ -77,20 +82,18 @@ public class TrackCommand implements Command {
         return false;
     }
 
-    private String getResponseMessage(Long chatId, URI link) {
+    private Mono<String> getResponseMessage(Long chatId, URI link) {
         return client.addLink(chatId, new AddLinkRequest(link))
-            .map(response -> {
-                if (HttpStatus.OK.equals(response.getStatusCode())
-                    && response.getBody() != null) {
-                    return languageManager.translate("command.track.response.link_added_success")
-                        .formatted(response.getBody().url());
+            .flatMap(response -> {
+                if (HttpStatus.OK.equals(response.getStatusCode()) && response.getBody() != null) {
+                    return Mono.just(languageManager.translate("command.track.response.link_added_success")
+                        .formatted(response.getBody().url()));
                 }
-                return languageManager.translate("command.error.default");
+                return Mono.just(languageManager.translate("command.error.default"));
             })
             .onErrorResume(
                 ApiErrorResponseException.class,
                 error -> Mono.just(error.getApiErrorResponse().description())
-            )
-            .block();
+            );
     }
 }

@@ -64,7 +64,7 @@ public class GitHubClientTest {
         WIRE_MOCK_SERVER.stubFor(WireMock.get("/repos/" + repositoryPath)
             .willReturn(WireMock.notFound()
                 .withHeader("Content-type", MediaType.APPLICATION_JSON_VALUE)
-                .withBody("{\"message\": \"Not Found\", \"documentation_url\": \"https://docs.github.com/rest/repos/repos#get-a-repository\"}")));
+                .withBody(String.format("{\"full_name\": \"%s\", \"created_at\": \"2023-06-27T21:10:31Z\", \"owner\": {\"login\": \"%s\", \"id\": \"12345\"}, \"name\": \"%s\"}", repositoryPath, authorName, repositoryName))));
 
         // When, Then
         assertThrows(WebClientResponseException.class, () -> client.getUserRepository(repositoryPath).block());
